@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class EncoderMotor extends Motor {
     //Class only variables
-    private float encoderPosition = 0;
+    private int encoderPosition = 0;
     private int previousEncoderPosition = 0;
 
 
@@ -51,6 +51,12 @@ public class EncoderMotor extends Motor {
         }
     }
 
+    public void continuousMoveToPosition(int target) {
+        while (!doneMoving(target)) {
+            moveToPosition(target);
+        }
+    }
+
     public void moveToPosition(int position) {
         if (encoderPosition>position&&super.velocity<0) {
             reverse();
@@ -58,6 +64,7 @@ public class EncoderMotor extends Motor {
         if (encoderPosition<position&&super.velocity>0) {
             reverse();
         }
+        updateMotor();
     }
 
     public void moveToPosition(int position, float defaultVelocity) {
@@ -69,6 +76,22 @@ public class EncoderMotor extends Motor {
         }
         if (encoderPosition<position&&super.velocity>0) {
             reverse();
+        }
+        updateMotor();
+    }
+
+    public void resetPosition() {
+        encoderPosition = 0;
+        previousEncoderPosition = 0;
+    }
+
+    public boolean doneMoving(int target) {
+        int distance = Math.abs(encoderPosition-target);
+        if (distance<=3) { //3 encoder ticks away from target
+            return true;
+        }
+        else {
+            return false;
         }
     }
 }
