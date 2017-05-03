@@ -62,43 +62,60 @@ public class DriveToLine extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-        xAxis.turnAllOff();
-        xAxis.reverseMotorVelocity(true, false);
-        yAxis.turnAllOff();
-        liftMotor.active = false;
 
         waitForStart();
         runtime.reset();
 
+        xAxis.turnAllOff();
+        xAxis.reverseMotorVelocity(true, false);
+        yAxis.turnAllOff();
+        liftMotor.active = false;
+        xAxis.updateMotors();
+        yAxis.updateMotors();
+
+
+
         xAxis.turnAllOn();
         yAxis.turnAllOff();
+        xAxis.updateMotors();
+        yAxis.updateMotors();
 
         wait(1000);
 
         xAxis.turnAllOff();
         xAxis.reverseMotorVelocity(true,false);
+        xAxis.updateMotors();
+        yAxis.updateMotors();
 
         wait(1000);
 
         xAxis.turnAllOn();
         yAxis.turnAllOn();
+        xAxis.updateMotors();
+        yAxis.updateMotors();
 
         wait(1000);
 
         xAxis.turnAllOff();
         yAxis.turnAllOff();
+        xAxis.updateMotors();
+        yAxis.updateMotors();
+
+
 
         while (opModeIsActive()) {
 
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.update();
+
         }
     }
 
     public void wait(int millis) {
-        try {
-            runtime.wait(millis);
+        double nextTime = runtime.milliseconds()+millis;
+        while (runtime.milliseconds()<nextTime) {
+            telemetry.addData("waiting:", "waiting");
+            telemetry.update();
         }
-        catch (Exception e) {}
     }
 }

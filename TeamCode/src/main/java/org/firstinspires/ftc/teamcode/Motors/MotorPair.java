@@ -43,4 +43,9 @@ public class MotorPair {
             motor2.reverse();
         }
     }
+
+    public void updateMotors() {
+        motor1.updateMotor();
+        motor2.updateMotor();
+    }
 }
