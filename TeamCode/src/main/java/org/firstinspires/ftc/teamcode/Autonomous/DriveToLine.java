@@ -32,6 +32,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package org.firstinspires.ftc.teamcode.Autonomous;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -42,18 +43,22 @@ import org.firstinspires.ftc.teamcode.Motors.EncoderMotor;
 import org.firstinspires.ftc.teamcode.Motors.Motor;
 import org.firstinspires.ftc.teamcode.Motors.MotorPair;
 
-@TeleOp(name="DriveForwardsAndSpazOut", group="forGlory")  // @Autonomous(...) is the other common choice
+@Autonomous(name="DriveForwardsAndSpazOut", group="forGlory")  // @Autonomous(...) is the other common choice
 public class DriveToLine extends LinearOpMode {
 
     /* Declare OpMode members. */
     private ElapsedTime runtime = new ElapsedTime();
 
-    MotorPair xAxis = new MotorPair(new Motor(0.5f,"motor1X",hardwareMap), new Motor(0.5f,"motor2X",hardwareMap));
-    MotorPair yAxis = new MotorPair(new Motor(0.5f,"motor1Y",hardwareMap), new Motor(0.5f,"motor2Y",hardwareMap));
-    EncoderMotor liftMotor = new EncoderMotor(0.5f,"liftMotor",hardwareMap,0,1000);
+    MotorPair xAxis = null;
+    MotorPair yAxis = null;
+    EncoderMotor liftMotor = null;
 
     @Override
     public void runOpMode() {
+        xAxis = new MotorPair(new Motor(0.5f,hardwareMap.dcMotor.get("motor1X")), new Motor(0.5f,hardwareMap.dcMotor.get("motor2X")));
+        yAxis = new MotorPair(new Motor(0.5f,hardwareMap.dcMotor.get("motor1Y")), new Motor(0.5f,hardwareMap.dcMotor.get("motor2Y")));
+        liftMotor = new EncoderMotor(0.5f,hardwareMap.dcMotor.get("liftMotor"),0,1000);
+
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 

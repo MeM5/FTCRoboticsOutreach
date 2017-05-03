@@ -15,8 +15,8 @@ public class Motor {
     public float velocity = 0.0f;
     public boolean active = false;
 
-    public Motor(float velocity, String name, HardwareMap hardwareMap) {
-        motor = hardwareMap.dcMotor.get(name);
+    public Motor(float velocity, DcMotor motor) {
+        this.motor = motor;
         this.velocity = velocity;
     }
 
