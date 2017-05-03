@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Motors;
 
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 /**
@@ -17,8 +18,8 @@ public class EncoderMotor extends Motor {
     public int maxEncoderTicks = 0;
 
 
-    public EncoderMotor(float velocity, String name, HardwareMap hw, int minEncoderTicks, int maxEncoderTicks)  {
-        super (velocity,name,hw);
+    public EncoderMotor(float velocity, DcMotor motor, int minEncoderTicks, int maxEncoderTicks)  {
+        super (velocity,motor);
         this.minEncoderTicks = minEncoderTicks;
         this.maxEncoderTicks = maxEncoderTicks;
     }

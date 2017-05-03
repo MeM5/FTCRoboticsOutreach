@@ -5,12 +5,12 @@ package org.firstinspires.ftc.teamcode.Motors;
  */
 
 public class MotorPair {
-    private EncoderMotor motor1;
-    private EncoderMotor motor2;
+    private Motor motor1;
+    private Motor motor2;
 
     public float velocity = 0;
 
-    public MotorPair(EncoderMotor motorA, EncoderMotor motorB, float velocity) {
+    public MotorPair(Motor motorA, Motor motorB) {
         motor1 = motorA;
         motor2 = motorB;
     }
@@ -42,5 +42,10 @@ public class MotorPair {
         if (b) {
             motor2.reverse();
         }
+    }
+
+    public void updateMotors() {
+        motor1.updateMotor();
+        motor2.updateMotor();
     }
 }
