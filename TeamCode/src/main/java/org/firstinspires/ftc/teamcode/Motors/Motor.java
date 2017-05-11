@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Motor {
     //Internal variables
-    DcMotor motor = null;
+    public DcMotor motor = null;
 
     //Public variables
     public float velocity = 0.0f;
@@ -34,6 +34,35 @@ public class Motor {
         }
         else {
             motor.setPower(0);
+        }
+    }
+
+    public void moveToPosition(int position, float defaultVelocity, boolean reversing) {
+        if (velocity==0) {
+            velocity=defaultVelocity;
+        }
+        if (motor.getCurrentPosition()>position&&velocity<0&&reversing) {
+            reverse();
+        }
+        if (motor.getCurrentPosition()<position&&velocity>0&&reversing) {
+            reverse();
+        }
+        updateMotor();
+    }
+
+    public void continuousMoveToPosition(int target) {
+        while (!doneMoving(target)) {
+            moveToPosition(target, 0.5f, false);
+        }
+    }
+
+    public boolean doneMoving(int target) {
+        int distance = Math.abs(motor.getCurrentPosition()-target);
+        if (distance<=1) { //3 encoder ticks away from target
+            return true;
+        }
+        else {
+            return false;
         }
     }
 }

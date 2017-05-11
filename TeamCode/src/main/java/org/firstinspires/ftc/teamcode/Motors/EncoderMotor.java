@@ -68,14 +68,14 @@ public class EncoderMotor extends Motor {
         updateMotor();
     }
 
-    public void moveToPosition(int position, float defaultVelocity) {
+    public void moveToPosition(int position, float defaultVelocity, boolean reversing) {
         if (velocity==0) {
             velocity=defaultVelocity;
         }
-        if (encoderPosition>position&&super.velocity<0) {
+        if (encoderPosition>position&&super.velocity<0&&reversing) {
             reverse();
         }
-        if (encoderPosition<position&&super.velocity>0) {
+        if (encoderPosition<position&&super.velocity>0&&reversing) {
             reverse();
         }
         updateMotor();
