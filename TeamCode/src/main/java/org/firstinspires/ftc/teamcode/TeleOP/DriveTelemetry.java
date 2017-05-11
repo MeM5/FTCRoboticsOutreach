@@ -32,18 +32,14 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package org.firstinspires.ftc.teamcode.TeleOP;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.util.ElapsedTime;
-
-import org.firstinspires.ftc.teamcode.Motors.MotorPair;
 
 
-@TeleOp(name="Main Drive", group="TeleOp")  // @Autonomous(...) is the other common choice
-public class Drive extends OpMode
+@TeleOp(name="Drive With Telemetry", group="TeleOp")  // @Autonomous(...) is the other common choice
+public class DriveTelemetry extends OpMode
 {
     /* Declare OpMode members. */
     DcMotor motor1X = null;
@@ -85,6 +81,12 @@ public class Drive extends OpMode
         motor2X.setPower(gamepad1.right_stick_y - gamepad1.left_stick_x);
         motor1Y.setPower(gamepad1.right_stick_x - gamepad1.left_stick_x);
         motor2Y.setPower(gamepad1.right_stick_x - gamepad1.left_stick_x);
+
+        //Add Telemetry
+        telemetry.addData("Control: ", "Left Stick X: " + gamepad1.left_stick_x);
+        telemetry.addData("Control: ", "Left Stick Y: " + gamepad1.left_stick_y);
+        telemetry.addData("Control: ", "Right Stick X: " + gamepad1.right_stick_x);
+        telemetry.addData("Control: ", "Right Stick Y: " + gamepad1.right_stick_y);
     }
 
     @Override
