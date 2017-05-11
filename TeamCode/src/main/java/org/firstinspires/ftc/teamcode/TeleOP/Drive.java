@@ -51,18 +51,17 @@ public class Drive extends OpMode
     DcMotor motor1Y = null;
     DcMotor motor2Y = null;
 
-    /*
-     * Code to run ONCE when the driver hits INIT
-     */
     @Override
     public void init() {
         telemetry.addData("Status", "Initialized");
 
+        //Mapping Motors to Config
         motor1X = hardwareMap.dcMotor.get("motor1X");
         motor2X = hardwareMap.dcMotor.get("motor2X");
         motor1Y = hardwareMap.dcMotor.get("motor1Y");
         motor2Y = hardwareMap.dcMotor.get("motor2Y");
 
+        //Mapping Default Directions
         motor1X.setDirection(DcMotorSimple.Direction.FORWARD);
         motor2X.setDirection(DcMotorSimple.Direction.REVERSE);
         motor1Y.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -83,17 +82,14 @@ public class Drive extends OpMode
     public void loop() {
         telemetry.addData("Status", "Running: ");
 
+        //Set Power for Translation and Rotation
         motor1X.setPower(gamepad1.right_stick_y - gamepad1.left_stick_x);
         motor2X.setPower(gamepad1.right_stick_y - gamepad1.left_stick_x);
-
         motor1Y.setPower(gamepad1.right_stick_x - gamepad1.left_stick_x);
         motor2Y.setPower(gamepad1.right_stick_x - gamepad1.left_stick_x);
 
     }
 
-    /*
-     * Code to run ONCE after the driver hits STOP
-     */
     @Override
     public void stop() {
     }
