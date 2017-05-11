@@ -53,21 +53,19 @@ public class Drive extends OpMode
 
     @Override
     public void init() {
-        telemetry.addData("Status", "Initialized");
-
         //Mapping Motors to Config
         motor1X = hardwareMap.dcMotor.get("motor1X");
         motor2X = hardwareMap.dcMotor.get("motor2X");
         motor1Y = hardwareMap.dcMotor.get("motor1Y");
         motor2Y = hardwareMap.dcMotor.get("motor2Y");
+        telemetry.addData("Initialize: ", "Motors Mapped");
 
         //Mapping Default Directions
         motor1X.setDirection(DcMotorSimple.Direction.FORWARD);
         motor2X.setDirection(DcMotorSimple.Direction.REVERSE);
         motor1Y.setDirection(DcMotorSimple.Direction.FORWARD);
         motor2Y.setDirection(DcMotorSimple.Direction.REVERSE);
-
-        telemetry.addData("Status", "Initialized");
+        telemetry.addData("Initialize: ", "Directions Mapped");
     }
 
     @Override
@@ -88,6 +86,11 @@ public class Drive extends OpMode
         motor1Y.setPower(gamepad1.right_stick_x - gamepad1.left_stick_x);
         motor2Y.setPower(gamepad1.right_stick_x - gamepad1.left_stick_x);
 
+        //Add Telemetry
+        telemetry.addData("Control: ", "Left Stick X: " + gamepad1.left_stick_x);
+        telemetry.addData("Control: ", "Left Stick Y: " + gamepad1.left_stick_y);
+        telemetry.addData("Control: ", "Right Stick X: " + gamepad1.right_stick_x);
+        telemetry.addData("Control: ", "Right Stick Y: " + gamepad1.right_stick_y);
     }
 
     @Override
