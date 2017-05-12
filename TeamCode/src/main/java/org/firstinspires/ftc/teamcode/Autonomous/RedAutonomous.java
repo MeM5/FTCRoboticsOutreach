@@ -72,13 +72,8 @@ public class RedAutonomous extends LinearOpMode {
 
 
 
-        xAxis.turnAllOn();
-        yAxis.turnAllOff();
-        xAxis.setPositionToMove(4000,0.5f, true, true);
-        wait(5000);
-        xAxis.encodersOff();
-        xAxis.setPositionToMove(800,0.5f,false,true);
-        yAxis.setPositionToMove(800,0.5f,false,true);
+        xAxis.setPositionToMove(-850, 1345, 0.5f, true);
+        yAxis.setPositionToMove(-1302, 1285, 0.5f, true);
 
 
 
