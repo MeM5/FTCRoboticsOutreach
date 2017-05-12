@@ -61,10 +61,10 @@ public class Drive extends OpMode
         telemetry.addData("Initialize: ", "Motors Mapped");
 
         //Mapping Default Directions
-        motor1X.setDirection(DcMotorSimple.Direction.FORWARD);
-        motor2X.setDirection(DcMotorSimple.Direction.REVERSE);
-        motor1Y.setDirection(DcMotorSimple.Direction.FORWARD);
-        motor2Y.setDirection(DcMotorSimple.Direction.REVERSE);
+        motor1X.setDirection(DcMotorSimple.Direction.REVERSE);
+        motor2X.setDirection(DcMotorSimple.Direction.FORWARD);
+        motor1Y.setDirection(DcMotorSimple.Direction.REVERSE);
+        motor2Y.setDirection(DcMotorSimple.Direction.FORWARD);
         telemetry.addData("Initialize: ", "Directions Mapped");
     }
 
@@ -81,9 +81,9 @@ public class Drive extends OpMode
         telemetry.addData("Status", "Running: ");
 
         //Set Power for Translation and Rotation
-        motor1X.setPower(gamepad1.right_stick_y - gamepad1.left_stick_x);
+        motor1X.setPower(gamepad1.right_stick_y + gamepad1.left_stick_x);
         motor2X.setPower(gamepad1.right_stick_y - gamepad1.left_stick_x);
-        motor1Y.setPower(gamepad1.right_stick_x - gamepad1.left_stick_x);
+        motor1Y.setPower(gamepad1.right_stick_x + gamepad1.left_stick_x);
         motor2Y.setPower(gamepad1.right_stick_x - gamepad1.left_stick_x);
     }
 
