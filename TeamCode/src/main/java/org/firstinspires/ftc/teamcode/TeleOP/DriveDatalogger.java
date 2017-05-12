@@ -42,7 +42,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.Motors.MotorPair;
 
 
-@TeleOp(name="Main Drive", group="TeleOp")  // @Autonomous(...) is the other common choice
+@TeleOp(name="Main Drive Datalogging", group="TeleOp")  // @Autonomous(...) is the other common choice
 public class DriveDatalogger extends OpMode
 {
     /* Declare OpMode members. */
