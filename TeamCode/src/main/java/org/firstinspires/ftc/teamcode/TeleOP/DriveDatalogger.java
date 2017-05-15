@@ -50,6 +50,7 @@ public class DriveDatalogger extends OpMode
     DcMotor motor2X = null;
     DcMotor motor1Y = null;
     DcMotor motor2Y = null;
+    DcMotor liftMotor = null;
 
     @Override
     public void init() {
@@ -58,6 +59,7 @@ public class DriveDatalogger extends OpMode
         motor2X = hardwareMap.dcMotor.get("motor2X");
         motor1Y = hardwareMap.dcMotor.get("motor1Y");
         motor2Y = hardwareMap.dcMotor.get("motor2Y");
+        liftMotor = hardwareMap.dcMotor.get("liftMotor");
         telemetry.addData("Initialize: ", "Motors Mapped");
 
         //Mapping Default Directions
@@ -65,12 +67,14 @@ public class DriveDatalogger extends OpMode
         motor2X.setDirection(DcMotorSimple.Direction.FORWARD);
         motor1Y.setDirection(DcMotorSimple.Direction.REVERSE);
         motor2Y.setDirection(DcMotorSimple.Direction.FORWARD);
+        liftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         telemetry.addData("Initialize: ", "Directions Mapped");
 
         motor1X.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motor2X.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motor1Y.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motor2Y.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
     @Override
@@ -96,17 +100,30 @@ public class DriveDatalogger extends OpMode
             motor2X.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             motor1Y.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             motor2Y.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
             motor1X.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             motor2X.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             motor1Y.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             motor2Y.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        }
+
+        if (gamepad1.dpad_up) {
+            liftMotor.setPower(0.5f);
+        }
+        else if (gamepad1.dpad_down) {
+            liftMotor.setPower(-0.5f);
+        }
+        else {
+            liftMotor.setPower(0.0f);
         }
 
         telemetry.addData("motor1X - ", motor1X.getCurrentPosition());
         telemetry.addData("motor2X - ", motor2X.getCurrentPosition());
         telemetry.addData("motor1Y - ", motor1Y.getCurrentPosition());
         telemetry.addData("motor2Y - ", motor2Y.getCurrentPosition());
+        telemetry.addData("liftMot - ", liftMotor.getCurrentPosition());
 
         telemetry.update();
     }
