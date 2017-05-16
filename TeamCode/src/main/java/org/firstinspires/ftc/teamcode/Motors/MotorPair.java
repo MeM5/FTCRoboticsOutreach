@@ -62,7 +62,7 @@ public class MotorPair {
 //        }
 //    }
 
-    public void setPositionToMove(int position, float velocity, boolean invertMotorTwo, boolean reset) throws java.lang.InterruptedException {
+    public void setPositionToMove(int motor1position, int motor2position, float power, boolean reset) throws java.lang.InterruptedException {
         if (reset) {
             motor1.motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             motor2.motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -70,17 +70,11 @@ public class MotorPair {
         motor1.motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         motor2.motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        motor1.motor.setTargetPosition(position);
+        motor1.motor.setTargetPosition(motor1position);
+        motor2.motor.setTargetPosition(motor2position);
 
-        if (invertMotorTwo) {
-            motor2.motor.setTargetPosition(-position);
-        }
-        else {
-            motor2.motor.setTargetPosition(position);
-        }
-
-        motor1.motor.setPower(velocity);
-        motor2.motor.setPower(velocity);
+        motor1.motor.setPower(power);
+        motor2.motor.setPower(power);
     }
 
     public void encodersOff() {

@@ -74,7 +74,7 @@ public class Drive36Inches extends LinearOpMode {
 
         xAxis.turnAllOn();
         yAxis.turnAllOff();
-        xAxis.setPositionToMove(4070,0.5f, true, true);
+//        xAxis.setPositionToMove(4070,0.5f, true, true);
 
 
 
