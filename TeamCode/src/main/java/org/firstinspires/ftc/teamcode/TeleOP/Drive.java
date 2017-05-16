@@ -52,6 +52,8 @@ public class Drive extends OpMode
     DcMotor motor2Y = null;
     DcMotor liftMotor = null;
 
+    float    power = 0;
+
     @Override
     public void init() {
         //Mapping Motors to Config
@@ -83,11 +85,14 @@ public class Drive extends OpMode
     public void loop() {
         telemetry.addData("Status", "Running: ");
 
+        //Get Power from Left Trigger
+        power = gamepad1.left_trigger;
+
         //Set Power for Translation and Rotation
-        motor1X.setPower(gamepad1.right_stick_y + gamepad1.left_stick_x);
-        motor2X.setPower(gamepad1.right_stick_y - gamepad1.left_stick_x);
-        motor1Y.setPower(gamepad1.right_stick_x + gamepad1.left_stick_x);
-        motor2Y.setPower(gamepad1.right_stick_x - gamepad1.left_stick_x);
+        motor1X.setPower((gamepad1.right_stick_y - gamepad1.left_stick_x) * power);
+        motor2X.setPower((gamepad1.right_stick_y + gamepad1.left_stick_x) * power);
+        motor1Y.setPower((gamepad1.right_stick_x - gamepad1.left_stick_x) * power);
+        motor2Y.setPower((gamepad1.right_stick_x + gamepad1.left_stick_x) * power);
 
         if(gamepad1.a){
             liftMotor.setPower(0.5f);
