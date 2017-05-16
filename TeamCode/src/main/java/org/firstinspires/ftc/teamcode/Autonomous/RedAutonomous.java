@@ -34,6 +34,7 @@ package org.firstinspires.ftc.teamcode.Autonomous;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Motors.EncoderMotor;
@@ -56,6 +57,11 @@ public class RedAutonomous extends LinearOpMode {
         yAxis = new MotorPair(new Motor(0.5f,hardwareMap.dcMotor.get("motor1Y")), new Motor(0.5f,hardwareMap.dcMotor.get("motor2Y")));
         liftMotor = new EncoderMotor(0.5f,hardwareMap.dcMotor.get("liftMotor"),0,1000);
 
+        xAxis.motor1.motor.setDirection(DcMotorSimple.Direction.REVERSE);
+        xAxis.motor2.motor.setDirection(DcMotorSimple.Direction.FORWARD);
+        yAxis.motor1.motor.setDirection(DcMotorSimple.Direction.REVERSE);
+        yAxis.motor2.motor.setDirection(DcMotorSimple.Direction.FORWARD);
+
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
@@ -71,9 +77,18 @@ public class RedAutonomous extends LinearOpMode {
         yAxis.updateMotors();
 
 
+//
+//        xAxis.setPositionToMove(-2693, -2954, 0.5f, true);
+//        wait(2500);
+//        yAxis.setPositionToMove(6146, 6116, 0.5f, true);
+//        wait(2500);
+//        xAxis.setPositionToMove(-3099, -3805, 0.5f, true);
+//        wait(2500);
+//        xAxis.setPositionToMove(-924, 1385, 0.5f, true);
+//        yAxis.setPositionToMove(-1326, 1319, 0.5f, true);
 
-        xAxis.setPositionToMove(-850, 1345, 0.5f, true);
-        yAxis.setPositionToMove(-1302, 1285, 0.5f, true);
+        xAxis.setPositionToMove(-478, -7492, 1.0f, true);
+        yAxis.setPositionToMove(14101, 7070, 1.0f, true);
 
 
 
@@ -83,6 +98,7 @@ public class RedAutonomous extends LinearOpMode {
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.update();
 
+            idle();
         }
     }
 
@@ -91,6 +107,7 @@ public class RedAutonomous extends LinearOpMode {
         while (runtime.milliseconds()<nextTime) {
             telemetry.addData("waiting:", "waiting");
             telemetry.update();
+            idle();
         }
     }
 }
