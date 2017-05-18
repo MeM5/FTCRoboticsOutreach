@@ -90,10 +90,10 @@ public class DriveDatalogger extends OpMode
         telemetry.addData("Status", "Running: ");
 
         //Set Power for Translation and Rotation
-        motor1X.setPower(gamepad1.right_stick_y + gamepad1.left_stick_x);
-        motor2X.setPower(gamepad1.right_stick_y - gamepad1.left_stick_x);
-        motor1Y.setPower(gamepad1.right_stick_x + gamepad1.left_stick_x);
-        motor2Y.setPower(gamepad1.right_stick_x - gamepad1.left_stick_x);
+        motor1X.setPower((gamepad1.right_stick_y + gamepad1.left_stick_x));
+        motor2X.setPower((gamepad1.right_stick_y - gamepad1.left_stick_x));
+        motor1Y.setPower((gamepad1.right_stick_x + gamepad1.left_stick_x));
+        motor2Y.setPower((gamepad1.right_stick_x - gamepad1.left_stick_x));
 
         if (gamepad1.a) { //Reset encoders
             motor1X.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

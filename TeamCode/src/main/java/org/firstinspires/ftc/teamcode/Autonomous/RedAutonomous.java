@@ -87,8 +87,33 @@ public class RedAutonomous extends LinearOpMode {
 //        xAxis.setPositionToMove(-924, 1385, 0.5f, true);
 //        yAxis.setPositionToMove(-1326, 1319, 0.5f, true);
 
-        xAxis.setPositionToMove(-478, -7492, 1.0f, true);
-        yAxis.setPositionToMove(14101, 7070, 1.0f, true);
+        moveX(-2715,-3502);
+        moveY(-153,162);
+        wait(2500); //2.5
+
+        moveX(-789,-1239);
+        moveY(8479,8469);
+        wait(3500); //6.0
+
+        moveX(-2848,-3642);
+        moveY(-113,169);
+        wait(2500); //8.5
+
+        moveX(79,-101);
+        moveY(1361,1083);
+        wait(1000); //9.5
+
+        liftMotor.moveToPosition(6087);
+        wait(5000);
+
+        moveX(-1952,-2867);
+        moveY(0,0);
+        wait(750); //16.25
+
+        moveX(-2500, -3750);
+        moveY(0,0);
+        wait(1000); //17.25
+
 
 
 
@@ -109,5 +134,13 @@ public class RedAutonomous extends LinearOpMode {
             telemetry.update();
             idle();
         }
+    }
+
+    public void moveX(int a, int b) throws java.lang.InterruptedException {
+        xAxis.setPositionToMove(a,b,1,true);
+    }
+
+    public void moveY(int a, int b) throws java.lang.InterruptedException {
+        yAxis.setPositionToMove(a,b,1,true);
     }
 }
