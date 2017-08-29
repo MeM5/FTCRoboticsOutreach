@@ -9,80 +9,107 @@ import java.util.ArrayList;
  */
 
 public class MotorPair {
-    public Motor motor1;
-    public Motor motor2;
-
+    //The motors that make up the motorPair
     public ArrayList<Motor> motors;
 
-    public float velocity = 0;
-
+    //Make a new motorPair using a predetermined array of motors
     public MotorPair(ArrayList<Motor> motors) {
         this.motors = motors;
     }
 
+    //Toggle the states of all of the motors
     public void toggleAllStates() {
-        motor1.active = !motor1.active;
-        motor2.active = !motor2.active;
+        for (Motor m : motors) {
+            m.toggleActive();
+        }
     }
 
+    //Turn all of the motors on
     public void turnAllOn() {
-        motor1.active = true;
-        motor2.active = true;
+        for (Motor m : motors) {
+            m.active = true;
+        }
     }
 
+    //Turn all of the motors off
     public void turnAllOff() {
-        motor1.active = false;
-        motor2.active = false;
+        for (Motor m : motors) {
+            m.active = true;
+        }
     }
 
+    //Set the velocity of all of the motors
     public void setAllVelocity(float velocity) {
-        motor1.velocity = velocity;
-        motor2.velocity = velocity;
-    }
-
-    public void reverseMotorVelocity(boolean a, boolean b) {
-        if (a) {
-            motor1.reverse();
-        }
-        if (b) {
-            motor2.reverse();
+        for (Motor m : motors) {
+            m.velocity = velocity;
         }
     }
 
+    //Reverse the motor at position in the array
+    public void reverseMotorVelocity(int position) {
+        motors.get(position).reverse();
+    }
+
+    //Update the motors
     public void updateMotors() {
-        motor1.updateMotor();
-        motor2.updateMotor();
+        for (Motor m : motors) {
+            m.updateMotor();
+        }
     }
 
-    public void setPositionToMove(int motor1position, int motor2position, float power, boolean reset) throws InterruptedException {
-        if (reset) {
-            motor1.motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            motor2.motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    //Reset the motor encoder positions
+    public void resetAllEncoders() {
+        for (Motor m : motors) {
+            m.resetEncoder();
         }
-        motor1.motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motor2.motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    }
 
-        motor1.motor.setTargetPosition(motor1position);
-        motor2.motor.setTargetPosition(motor2position);
+    //Set the position of each motor in the motor array, each position in the array coresponds to a motor
+    public void setPositionToMove(int[] positions, float powerin, float power, boolean reset) throws InterruptedException {
+        if (reset) {
+            resetAllEncoders();
+        }
 
-        motor1.motor.setPower(power);
-        motor2.motor.setPower(power);
+        setModes(DcMotor.RunMode.RUN_TO_POSITION);
+
+        int motorpos = 0;
+        for (Motor m : motors) {
+            m.motor.setTargetPosition(positions[motorpos]);
+            motorpos++;
+
+            m.setVelocityAndMove(powerin);
+        }
     }
 
     public void encodersOff() {
-        motor1.motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        motor2.motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        setModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
     public int[] getPositions() { //Get positions of motors, formatted motor1, motor2
-        return new int[] {
-                motor1.motor.getCurrentPosition(),
-                motor2.motor.getCurrentPosition()
-        };
+        int[] output = new int[motors.size()];
+        int mCounter = 0;
+        for (Motor m : motors) {
+            output[mCounter] = m.motor.getCurrentPosition();
+            mCounter++;
+        }
+        return output;
     }
 
     public void resetPositions() { //Reset motor positions back to 0
-        motor1.motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motor2.motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        setModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    }
+
+    public void setModes(DcMotor.RunMode mode) {
+        for (Motor m : motors) {
+            m.motor.setMode(mode);
+        }
+    }
+
+    public boolean atPosition(float error) {
+        boolean output = false;
+        //Check motor1 position to target
+
+
+        return output;
     }
 }
